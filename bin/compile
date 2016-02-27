@@ -277,7 +277,8 @@ case $TOOL in
         PATH=$GOROOT/bin:$PATH
 	GOPATH=$HOME/go export GOPATH
 	mkdir -p $GOPATH
-        name=$(cd $build && go list)
+        # name=$(cd $build && go list)
+	name=github.com/itsabot/abot
         unset GIT_DIR # unset git dir or it will mess with goinstall
         if test -d "$GOPATH/src/github.com/robfig/glock"
         then
@@ -292,7 +293,6 @@ case $TOOL in
         cp -R $build/* $p
         cd $p
         step "Running: glock sync"
-	echo $name
         glock sync $name
         cd $GOPATH/src/$name
         step "Running: go install -v ${FLAGS[@]} $name"
