@@ -314,16 +314,28 @@ case $TOOL in
 	echo -n "       Installing Bazaar..."
 	pip install bzr > /dev/null 2>&1
 	echo " done"
-	step "Installing mercurial"
+
+	step "Installing mercurial..."
 	pip install mercurial > /dev/null 2>&1
+	echo " done"
+
         step "Running: glock sync"
         glock sync $name
-        cd $GOPATH/src/$name
-        step "Running: go install -v ${FLAGS[@]} $name"
-        go install -v "${FLAGS[@]}" $name
+
+        if test -d "$GOPATH/src/github.com/robfig/glock"
+        then
+            step "Using abotp"
+        else
+            start "Installing abotp"
+            go get github.com/itsabot/abot/cmd/abotp
+            finished
+        fi
+
 	step "Getting packages"
 	abotp
-	step "Installing packages"
+
+        cd $GOPATH/src/$name
+        step "Running: go install -v ${FLAGS[@]} $name"
         go install -v "${FLAGS[@]}" $name
     ;;
 esac
