@@ -278,7 +278,7 @@ case $TOOL in
 	GOPATH=$HOME/go export GOPATH
 	mkdir -p $GOPATH
         # name=$(cd $build && go list)
-	name=github.com/itsabot/abot
+	name="github.com/itsabot/abot"
         unset GIT_DIR # unset git dir or it will mess with goinstall
         if test -d "$GOPATH/src/github.com/robfig/glock"
         then
