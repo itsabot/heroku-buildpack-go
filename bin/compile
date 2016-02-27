@@ -335,8 +335,8 @@ case $TOOL in
         cd $GOPATH/src/$name
 	abotp
 
-        step "Running: go install -v ${FLAGS[@]} $name"
-        go install -v "${FLAGS[@]}" $name
+        step "Running: go install ${FLAGS[@]} $name"
+        go install "${FLAGS[@]}" $name
     ;;
 esac
 
