@@ -273,7 +273,6 @@ case $TOOL in
         rm -rf pkg
     ;;
     glock)
-        GOBIN=$build/bin export GOBIN
         PATH=$GOROOT/bin:$PATH
 	GOPATH=$HOME/go export GOPATH
 	mkdir -p $GOPATH
@@ -293,6 +292,7 @@ case $TOOL in
         cd $p
         step "Running: glock sync"
         glock sync $name
+        GOBIN=$build/bin export GOBIN
         cd $GOPATH/src/$name
         step "Running: go install -v ${FLAGS[@]} $name"
         go install -v "${FLAGS[@]}" $name
