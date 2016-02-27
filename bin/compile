@@ -275,7 +275,7 @@ case $TOOL in
     glock)
         GOBIN=$build/bin export GOBIN
 	GOPATH=$HOME/go export GOPATH
-        PATH=$GOROOT/bin:$GOPATH/bin:$PATH export PATH
+        PATH=$GOROOT/bin:$GOPATH/bin:$GOBIN:$PATH
 	mkdir -p $GOPATH/{bin,src,pkg}
         # name=$(cd $build && go list)
 	name="github.com/itsabot/abot"
