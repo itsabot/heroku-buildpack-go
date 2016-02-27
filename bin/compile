@@ -332,6 +332,7 @@ case $TOOL in
         fi
 
 	step "Getting packages"
+        cd /app
 	abotp
 
         cd $GOPATH/src/$name
