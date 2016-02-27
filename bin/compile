@@ -292,6 +292,8 @@ case $TOOL in
         mkdir -p $p
         cp -R $build/* $p
         cd $p
+	step "Installing mercurial"
+	pip install mercurial
         step "Running: glock sync"
 	ls $HOME/go/bin
         glock sync $name
