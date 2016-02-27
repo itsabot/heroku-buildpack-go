@@ -276,7 +276,7 @@ case $TOOL in
         GOBIN=$build/bin export GOBIN
 	GOPATH=$HOME/go export GOPATH
         PATH=$GOROOT/bin:$GOPATH/bin:$PATH
-	mkdir -p $GOPATH
+	mkdir -p $GOPATH/{bin,src,pkg}
         # name=$(cd $build && go list)
 	name="github.com/itsabot/abot"
         unset GIT_DIR # unset git dir or it will mess with goinstall
