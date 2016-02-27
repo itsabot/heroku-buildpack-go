@@ -27,11 +27,11 @@ urlfor() {
 DEFAULT_GO_VERSION="go1.6"
 
 # Python
-mkdir -p $2
+mkdir -p "$1" "$2"
 cache=$(cd "$2/" && pwd)
 venv=$cache/venv
 mkdir -p $cache/pip
-python=python-2.7.11
+python=python2.7
 PATH=$buildpack/$plat/bin:$venv/bin:$PATH
 
 
