@@ -113,7 +113,10 @@ then
     done
 fi
 
-if test -f "$build/Godeps/Godeps.json"
+if test -f "$build/GLOCKFILE"
+then
+    TOOL="glock"
+elif test -f "$build/Godeps/Godeps.json"
 then
     step "Checking Godeps/Godeps.json file."
     if ! jq -r . < $build/Godeps/Godeps.json > /dev/null
@@ -267,6 +270,31 @@ case $TOOL in
         step "Post Compile Cleanup"
         for f in bin/*-heroku; do mv "$f" "${f/-heroku}"; done
         rm -rf pkg
+    ;;
+    glock)
+        GOBIN=$build/bin export GOBIN
+        PATH=$GOROOT/bin:$PATH
+	GOPATH=$HOME/go export GOPATH
+	mkdir -p $GOPATH
+        name=$(cd $build && go list)
+        unset GIT_DIR # unset git dir or it will mess with goinstall
+        if test -d "$GOPATH/src/github.com/robfig/glock"
+        then
+            step "Using Glock"
+        else
+            start "Installing Glock"
+            go get github.com/robfig/glock
+            finished
+        fi
+        p=$GOPATH/src/$name
+        mkdir -p $p
+        cp -R $build/* $p
+        cd $p
+        step "Running: glock sync"
+        glock sync $name
+        cd $GOPATH/src/$name
+        step "Running: go install -v ${FLAGS[@]} $name"
+        go install -v "${FLAGS[@]}" $name
     ;;
 esac
 
