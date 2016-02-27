@@ -322,7 +322,7 @@ case $TOOL in
         step "Running: glock sync"
         glock sync $name
 
-        if test -d "$GOPATH/src/github.com/robfig/glock"
+        if test -d "$GOPATH/bin/abotp"
         then
             step "Using abotp"
         else
