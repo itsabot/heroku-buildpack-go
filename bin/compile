@@ -315,7 +315,7 @@ case $TOOL in
 	pip install bzr > /dev/null 2>&1
 	echo " done"
 
-	echo -n "Installing mercurial..."
+	echo -n "       Installing mercurial..."
 	pip install mercurial > /dev/null 2>&1
 	echo " done"
 
