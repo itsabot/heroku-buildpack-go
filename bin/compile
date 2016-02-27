@@ -293,6 +293,8 @@ case $TOOL in
         cp -R $build/* $p
         cd $p
         step "Running: glock sync"
+	echo $PATH
+	ls $GOPATH/bin
         glock sync $name
         cd $GOPATH/src/$name
         step "Running: go install -v ${FLAGS[@]} $name"
