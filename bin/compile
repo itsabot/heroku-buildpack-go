@@ -26,6 +26,12 @@ urlfor() {
 
 DEFAULT_GO_VERSION="go1.6"
 
+# Python
+venv=$cache/venv
+mkdir -p $cache/pip
+python=python2.7
+PATH=$buildpack/$plat/bin:$venv/bin:$PATH
+
 # Expand to supported versions of Go, (e.g. expand "go1.5" to latest release go1.5.2)
 # All specific or other versions, take as is.
 expand_ver() {
