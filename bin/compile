@@ -285,7 +285,7 @@ case $TOOL in
             step "Using Glock"
         else
             start "Installing Glock"
-            go get github.com/robfig/glock
+            go get -v github.com/robfig/glock
             finished
         fi
         p=$GOPATH/src/$name
