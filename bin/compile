@@ -26,12 +26,6 @@ urlfor() {
 
 DEFAULT_GO_VERSION="go1.6"
 
-# Python
-venv=$cache/venv
-mkdir -p $cache/pip
-python=python2.7
-PATH=$buildpack/$plat/bin:$venv/bin:$PATH
-
 # Expand to supported versions of Go, (e.g. expand "go1.5" to latest release go1.5.2)
 # All specific or other versions, take as is.
 expand_ver() {
@@ -298,6 +292,23 @@ case $TOOL in
         mkdir -p $p
         cp -R $build/* $p
         cd $p
+	echo
+	echo "       Tired of waiting for bzr and hg?"
+	echo "       Try github.com/kr/godep for faster deploys."
+	echo
+
+	echo -n "       Installing Virtualenv..."
+	virtualenv --python $python --distribute --never-download --prompt='(venv) ' $venv > /dev/null 2>&1
+	. $venv/bin/activate > /dev/null 2>&1
+	echo " done"
+
+	echo -n "       Installing Mercurial..."
+	pip install mercurial > /dev/null 2>&1
+	echo " done"
+
+	echo -n "       Installing Bazaar..."
+	pip install bzr > /dev/null 2>&1
+	echo " done"
 	step "Installing mercurial"
 	pip install mercurial
         step "Running: glock sync"
