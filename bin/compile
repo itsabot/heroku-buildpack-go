@@ -315,7 +315,7 @@ case $TOOL in
 	pip install bzr > /dev/null 2>&1
 	echo " done"
 
-	step "Installing mercurial..."
+	echo -n "Installing mercurial..."
 	pip install mercurial > /dev/null 2>&1
 	echo " done"
 
@@ -332,10 +332,9 @@ case $TOOL in
         fi
 
 	step "Getting packages"
-        cd /app
+        cd $GOPATH/src/$name
 	abotp
 
-        cd $GOPATH/src/$name
         step "Running: go install -v ${FLAGS[@]} $name"
         go install -v "${FLAGS[@]}" $name
     ;;
