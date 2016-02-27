@@ -26,13 +26,6 @@ urlfor() {
 
 DEFAULT_GO_VERSION="go1.6"
 
-# Python
-mkdir -p "$1" "$2"
-cache=$(cd "$2/" && pwd)
-venv=$cache/venv
-mkdir -p $cache/pip
-python=python2.7
-PATH=$buildpack/$plat/bin:$venv/bin:$PATH
 
 
 # Expand to supported versions of Go, (e.g. expand "go1.5" to latest release go1.5.2)
@@ -79,13 +72,17 @@ arch=$(uname -m|tr A-Z a-z)
 if test $arch = x86_64
 then arch=amd64
 fi
-plat=$(uname|tr A-Z a-z)-$arch
+
 
 # Python
+mkdir -p "$1" "$2"
+cache=$(cd "$2/" && pwd)
 venv=$cache/venv
 mkdir -p $cache/pip
 python=python2.7
 PATH=$buildpack/$plat/bin:$venv/bin:$PATH
+plat=$(uname|tr A-Z a-z)-$arch
+
 steptxt="----->"
 
 warn() {
