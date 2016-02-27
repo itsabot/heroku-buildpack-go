@@ -275,7 +275,7 @@ case $TOOL in
     glock)
         GOBIN=$build/bin export GOBIN
 	GOPATH=$HOME/go export GOPATH
-        PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+        PATH=$GOROOT/bin:$GOPATH/bin:$PATH export PATH
 	mkdir -p $GOPATH/{bin,src,pkg}
         # name=$(cd $build && go list)
 	name="github.com/itsabot/abot"
@@ -285,7 +285,7 @@ case $TOOL in
             step "Using Glock"
         else
             start "Installing Glock"
-            go get -v github.com/robfig/glock
+            go get github.com/robfig/glock
             finished
         fi
         p=$GOPATH/src/$name
