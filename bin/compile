@@ -116,6 +116,7 @@ fi
 if test -f "$build/GLOCKFILE"
 then
     TOOL="glock"
+    ver="go1.6"
 elif test -f "$build/Godeps/Godeps.json"
 then
     step "Checking Godeps/Godeps.json file."
