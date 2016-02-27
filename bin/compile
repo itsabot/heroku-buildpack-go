@@ -27,6 +27,7 @@ urlfor() {
 DEFAULT_GO_VERSION="go1.6"
 
 # Python
+mkdir -p $2
 cache=$(cd "$2/" && pwd)
 venv=$cache/venv
 mkdir -p $cache/pip
