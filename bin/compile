@@ -338,8 +338,7 @@ case $TOOL in
         go install "${FLAGS[@]}" $name
 
         step "Syncing package dependencies..."
-	echo $(pwd)
-	echo $(ls "/app/go/src/github.com/itsabot/abot")
+	echo $(ls -al "/app/go/src/github.com/itsabot/abot")
 	cd $p/packages
 	for d in */; do
 		cd $d
