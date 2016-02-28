@@ -342,7 +342,7 @@ case $TOOL in
         go install "${FLAGS[@]}" $name
 
         step "Syncing package dependencies"
-	cd $name/packages/
+	cd $p/packages
 	for d in */; do
 		cd $d
 		echo $(basename $d)
