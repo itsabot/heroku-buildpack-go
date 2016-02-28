@@ -347,7 +347,7 @@ case $TOOL in
 		cd $d
 		base=$(basename $d)
 		IFS='-' read -r -a array <<< "$base"
-		pkg=${array[-1]}
+		pkg=${array[-2]}
 		step "Syncing package: $pkg"
 		glock -v sync "$name/packages/$pkg"
 		step "Installing package"
