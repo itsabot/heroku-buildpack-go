@@ -349,7 +349,8 @@ case $TOOL in
 		IFS='-' read -r -a array <<< "$base"
 		pkg=${array[-2]}
 		echo -n "       Syncing $pkg..."
-		glock -v sync "$name/packages/$base"
+		echo "CURRENT DIR: $(pwd)"
+		glock sync "$name/packages/$base"
 		echo " done"
 		echo -n "       Installing $pkg..."
 		go install -v "${FLAGS[@]}" .
