@@ -314,9 +314,10 @@ case $TOOL in
 	echo " done"
 
         step "Running: glock sync"
+	echo $(ls -al $p)
         glock sync $name
 
-        if test -d "$GOPATH/bin/abotp"
+        if test -f "$GOPATH/bin/abotp"
         then
             step "Using abotp"
         else
@@ -337,10 +338,7 @@ case $TOOL in
         step "Running: go install ${FLAGS[@]} $name"
         go install "${FLAGS[@]}" $name
 
-	go get github.com/itsabot/abot
-
         step "Syncing package dependencies..."
-	echo $(ls -al "/app/go/src/github.com/itsabot/abot")
 	cd $p/packages
 	for d in */; do
 		cd $d
