@@ -335,6 +335,11 @@ case $TOOL in
         cd $GOPATH/src/$name
 	abotp
 
+	step "Building assets"
+	mkdir -p public/js public/css assets/vendor/js assets/vendor/css
+	cat assets/{vendor/,}js/*.js > public/js/main.js
+	cat assets/{vendor/,}css/*.css > public/css/main.css
+
         step "Running: go install ${FLAGS[@]} $name"
         go install "${FLAGS[@]}" $name
     ;;
