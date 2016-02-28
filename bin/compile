@@ -345,9 +345,10 @@ case $TOOL in
 	cd $p/packages
 	for d in */; do
 		cd $d
-		echo $(basename $d)
+		step "Syncing package: $(basename $d)"
 		glock -v sync "$name/packages/$(basename $d)"
-		go install "${FLAGS[@]}" "$name/packages/$(basename $d)"
+		step "Installing package"
+		go install -v "${FLAGS[@]}" "$name/packages/$(basename $d)"
 	done
     ;;
 esac
