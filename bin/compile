@@ -337,8 +337,6 @@ case $TOOL in
         step "Running: go install ${FLAGS[@]} $name"
         go install "${FLAGS[@]}" $name
 
-	go get -v -d github.com/itsabot/abot
-
         step "Syncing package dependencies..."
 	echo $(pwd)
 	echo $(ls "/app/go/src/github.com/itsabot/abot")
