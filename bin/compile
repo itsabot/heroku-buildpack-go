@@ -26,8 +26,6 @@ urlfor() {
 
 DEFAULT_GO_VERSION="go1.6"
 
-
-
 # Expand to supported versions of Go, (e.g. expand "go1.5" to latest release go1.5.2)
 # All specific or other versions, take as is.
 expand_ver() {
@@ -341,7 +339,7 @@ case $TOOL in
 	cat assets/{vendor/,}css/*.css > public/css/main.css
 
         step "Running: go install ${FLAGS[@]} $name"
-        go install "${FLAGS[@]}" $name
+        go install "${FLAGS[@]}" ./... # $name
     ;;
 esac
 
