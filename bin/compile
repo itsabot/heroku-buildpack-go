@@ -350,7 +350,6 @@ case $TOOL in
 		pkg=${array[-2]}
 		echo -n "       Syncing $pkg..."
 		glock -v sync "$name/packages/$base"
-		# glock -v sync "github.com/itsabot/$pkg"
 		echo " done"
 		echo -n "       Installing $pkg..."
 		go install -v "${FLAGS[@]}" .
