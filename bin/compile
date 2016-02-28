@@ -342,10 +342,13 @@ case $TOOL in
         go install "${FLAGS[@]}" $name
 
         step "Syncing package dependencies"
-	for d in $name/packages/*/; do
-		glock sync $d
+	cd $name/packages/
+	for d in */; do
+		cd $d
+		echo $(basename $d)
+		glock sync "$name/packages/$(basename $d)"
+		go install "${FLAGS[@]}" $d
 	done
-        go install "${FLAGS[@]}" $name
     ;;
 esac
 
