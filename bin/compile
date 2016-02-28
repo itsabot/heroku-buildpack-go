@@ -344,6 +344,7 @@ case $TOOL in
 	go get -v -d github.com/itsabot/abot
 
         step "Syncing package dependencies..."
+	echo $(pwd)
 	echo $(ls "/app/go/src/github/itsabot/abot")
 	cd $p/packages
 	for d in */; do
