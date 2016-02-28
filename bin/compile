@@ -345,10 +345,13 @@ case $TOOL in
 	cd $p/packages
 	for d in */; do
 		cd $d
-		step "Syncing package: $(basename $d)"
-		glock -v sync "$name/packages/$(basename $d)"
+		base=$(basename $d)
+		IFS='-' read -r -a array <<< "$base"
+		pkg=${array[-1]}
+		step "Syncing package: $(pkg)"
+		glock -v sync "$name/packages/$(pkg)"
 		step "Installing package"
-		go install -v "${FLAGS[@]}" "$name/packages/$(basename $d)"
+		go install -v "${FLAGS[@]}" .
 	done
     ;;
 esac
