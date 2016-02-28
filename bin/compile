@@ -341,17 +341,21 @@ case $TOOL in
         step "Running: go install ${FLAGS[@]} $name"
         go install "${FLAGS[@]}" $name
 
-        step "Syncing package dependencies"
+        step "Syncing package dependencies..."
 	cd $p/packages
 	for d in */; do
 		cd $d
 		base=$(basename $d)
 		IFS='-' read -r -a array <<< "$base"
 		pkg=${array[-2]}
-		step "Syncing package: $pkg"
-		glock -v sync "$name/packages/$pkg"
-		step "Installing package"
+		echo -n "       Syncing $pkg..."
+		echo $(pwd)
+		echo $name/packages/$base
+		glock -v sync "$name/packages/$base"
+		echo " done"
+		echo -n "       Installing $pkg..."
 		go install -v "${FLAGS[@]}" .
+		echo " done"
 	done
     ;;
 esac
