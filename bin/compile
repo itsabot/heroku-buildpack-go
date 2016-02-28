@@ -346,7 +346,7 @@ case $TOOL in
 	for d in */; do
 		cd $d
 		echo $(basename $d)
-		glock sync -v "$name/packages/$(basename $d)"
+		glock -v sync "$name/packages/$(basename $d)"
 		go install "${FLAGS[@]}" "$name/packages/$(basename $d)"
 	done
     ;;
