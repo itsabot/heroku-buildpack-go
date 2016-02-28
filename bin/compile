@@ -351,14 +351,13 @@ case $TOOL in
 		base=$(basename $d)
 		IFS='-' read -r -a array <<< "$base"
 		pkg=${array[-2]}
-		echo -n "       Syncing $pkg..."
+		step "Syncing $pkg..."
 		glock sync "$name/packages/$base"
-		echo " done"
-		echo -n "       Installing $pkg..."
+		finished
+		step "Installing $pkg..."
 		go install -v "${FLAGS[@]}" .
-		echo " done"
+		finished
 	done
-	finished
     ;;
 esac
 
