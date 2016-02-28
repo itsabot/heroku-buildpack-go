@@ -314,7 +314,6 @@ case $TOOL in
 	echo " done"
 
         step "Running: glock sync"
-	echo $(ls -al $p)
         glock sync $name
 
         if test -f "$GOPATH/bin/abotp"
@@ -338,6 +337,13 @@ case $TOOL in
         step "Running: go install ${FLAGS[@]} $name"
         go install "${FLAGS[@]}" $name
 
+	step "Cloning repo..."
+	cd ..
+	git clone https://github.com/itsabot/abot.git tmp
+	mv tmp/.git abot/.git
+	rm -rf tmp
+	finished
+
         step "Syncing package dependencies..."
 	cd $p/packages
 	for d in */; do
@@ -352,6 +358,7 @@ case $TOOL in
 		go install -v "${FLAGS[@]}" .
 		echo " done"
 	done
+	finished
     ;;
 esac
 
