@@ -316,18 +316,9 @@ case $TOOL in
         step "Running: glock sync"
         glock sync $name
 
-        if test -f "$GOPATH/bin/abotp"
-        then
-            step "Using abotp"
-        else
-            start "Installing abotp"
-            go get github.com/itsabot/abot/cmd/abotp
-            finished
-        fi
-
-	step "Getting packages"
+	step "Getting plugins"
         cd $GOPATH/src/$name
-	abotp
+	abot plugin install
 
 	step "Building assets"
 	mkdir -p $build/public/{js,css}
@@ -344,15 +335,15 @@ case $TOOL in
 	rm -rf tmp
 	finished
 
-        step "Syncing package dependencies..."
-	cd $p/packages
+        step "Syncing plugin dependencies..."
+	cd $p/plugins
 	for d in */; do
 		cd $d
 		base=$(basename $d)
 		IFS='-' read -r -a array <<< "$base"
 		pkg=${array[-2]}
 		step "Syncing $pkg..."
-		glock sync "$name/packages/$base"
+		glock sync "$name/plugins/$base"
 		finished
 		step "Installing $pkg..."
 		go install -v "${FLAGS[@]}" .
