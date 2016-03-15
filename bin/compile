@@ -324,16 +324,16 @@ case $TOOL in
         step "Running: go install ${FLAGS[@]} $name"
         go install "${FLAGS[@]}" $name
 
+	step "Cloning repo..."
+	cd ..
+	git clone https://github.com/itsabot/abot.git tmp
+	mv tmp/.git abot/.git
+	rm -rf tmp
+	finished
+
 	step "Getting plugins"
         cd $GOPATH/src/$name
 	abot plugin install
-
-	# step "Cloning repo..."
-	# cd ..
-	# git clone https://github.com/itsabot/abot.git tmp
-	# mv tmp/.git abot/.git
-	# rm -rf tmp
-	# finished
 
         # step "Syncing plugin dependencies..."
 	# cd $p/plugins
