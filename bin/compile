@@ -343,7 +343,7 @@ case $TOOL in
 		IFS='-' read -r -a array <<< "$base"
 		pkg=${array[-2]}
 		step "Syncing $pkg..."
-		go get -v ./...
+		go get "${FLAGS[@]}" ./...
 		glock sync "$name/plugins/$base"
 		finished
 		step "Installing $pkg..."
