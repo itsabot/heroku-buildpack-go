@@ -316,10 +316,6 @@ case $TOOL in
         step "Running: glock sync"
         glock sync $name
 
-	step "Getting plugins"
-        cd $GOPATH/src/$name
-	abot plugin install
-
 	step "Building assets"
 	mkdir -p $build/public/{js,css}
 	cat assets/{vendor/,}js/*.js > $build/public/js/main.js
@@ -328,27 +324,31 @@ case $TOOL in
         step "Running: go install ${FLAGS[@]} $name"
         go install "${FLAGS[@]}" $name
 
-	step "Cloning repo..."
-	cd ..
-	git clone https://github.com/itsabot/abot.git tmp
-	mv tmp/.git abot/.git
-	rm -rf tmp
-	finished
+	step "Getting plugins"
+        cd $GOPATH/src/$name
+	abot plugin install
 
-        step "Syncing plugin dependencies..."
-	cd $p/plugins
-	for d in */; do
-		cd $d
-		base=$(basename $d)
-		IFS='-' read -r -a array <<< "$base"
-		pkg=${array[-2]}
-		step "Syncing $pkg..."
-		glock sync "$name/plugins/$base"
-		finished
-		step "Installing $pkg..."
-		go install -v "${FLAGS[@]}" .
-		finished
-	done
+	# step "Cloning repo..."
+	# cd ..
+	# git clone https://github.com/itsabot/abot.git tmp
+	# mv tmp/.git abot/.git
+	# rm -rf tmp
+	# finished
+
+        # step "Syncing plugin dependencies..."
+	# cd $p/plugins
+	# for d in */; do
+	# 	cd $d
+	# 	base=$(basename $d)
+	# 	IFS='-' read -r -a array <<< "$base"
+	# 	pkg=${array[-2]}
+	# 	step "Syncing $pkg..."
+	# 	glock sync "$name/plugins/$base"
+	# 	finished
+	# 	step "Installing $pkg..."
+	# 	go install -v "${FLAGS[@]}" .
+	# 	finished
+	# done
     ;;
 esac
 
