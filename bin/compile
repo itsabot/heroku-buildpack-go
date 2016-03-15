@@ -333,6 +333,8 @@ case $TOOL in
 
 	step "Getting plugins"
         cd $GOPATH/src/$name
+	echo $(ls $GOPATH/src/github.com)
+	echo $(ls $GOPATH/src/github.com/NickPresta)
 	abot plugin install
 
         step "Syncing plugin dependencies..."
