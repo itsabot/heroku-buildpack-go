@@ -335,20 +335,20 @@ case $TOOL in
         cd $GOPATH/src/$name
 	abot plugin install
 
-        # step "Syncing plugin dependencies..."
-	# cd $p/plugins
-	# for d in */; do
-	# 	cd $d
-	# 	base=$(basename $d)
-	# 	IFS='-' read -r -a array <<< "$base"
-	# 	pkg=${array[-2]}
-	# 	step "Syncing $pkg..."
-	# 	glock sync "$name/plugins/$base"
-	# 	finished
-	# 	step "Installing $pkg..."
-	# 	go install -v "${FLAGS[@]}" .
-	# 	finished
-	# done
+        step "Syncing plugin dependencies..."
+	cd $p/plugins
+	for d in */; do
+		cd $d
+		base=$(basename $d)
+		IFS='-' read -r -a array <<< "$base"
+		pkg=${array[-2]}
+		step "Syncing $pkg..."
+		glock sync "$name/plugins/$base"
+		finished
+		step "Installing $pkg..."
+		go install -v "${FLAGS[@]}" .
+		finished
+	done
     ;;
 esac
 
