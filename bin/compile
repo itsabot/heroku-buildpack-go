@@ -334,22 +334,6 @@ case $TOOL in
 	step "Getting plugins"
         cd $GOPATH/src/$name
 	abot plugin install
-
-        step "Syncing plugin dependencies..."
-	cd $p/plugins
-	for d in */; do
-		cd $d
-		base=$(basename $d)
-		IFS='-' read -r -a array <<< "$base"
-		pkg=${array[-2]}
-		step "Syncing $pkg..."
-		go get "${FLAGS[@]}" ./...
-		glock sync "$name/plugins/$base"
-		finished
-		step "Installing $pkg..."
-		go install -v "${FLAGS[@]}" .
-		finished
-	done
     ;;
 esac
 
