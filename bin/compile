@@ -330,10 +330,6 @@ case $TOOL in
 	mv tmp/.git abot/.git
 	rm -rf tmp
 	finished
-
-	step "Getting plugins"
-        cd $GOPATH/src/$name
-	abot plugin install
     ;;
 esac
 
